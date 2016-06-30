@@ -1,15 +1,17 @@
 <html>
 
 <head>
-<script data-main='../lib/Components/main.js' src="../node_modules/requirejs/require.js" > </script>
-<script> 
+    <script data-main='../lib/Components/main.js' src="../node_modules/requirejs/require.js"> </script>
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css" />
+    <script> 
 requirejs.config({
     
     paths:{
         react:'../../node_modules/react/dist/react',
         redux:"../../node_modules/redux/dist/redux",
         reactDom:"../../node_modules/react-dom/dist/react-dom",
-        jquery:"../../node_modules/jquery/dist/jquery"
+        jquery:"../../node_modules/jquery/dist/jquery",
+        reactRouter: "../../node_modules/react-router/umd/ReactRouter"
 
 
     }
@@ -20,11 +22,17 @@ requirejs.config({
 </head>
 
 <body>
-    <div id="doctorsdiv">
+
+
+    
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#">Doctors</a></li>
+            <li><a href="#">Create New</a> </li>
+        </ul>
+        <div id="main">
     </div>
 
 </body>
 
 
 </html>
-

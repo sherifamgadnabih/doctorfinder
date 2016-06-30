@@ -5,7 +5,7 @@ define(function (require, exports, module) {
   var actions = {
 
     GetDoctors: function () {
-      $.ajax('http://localhost:8080/Doctors/', {
+      $.ajax('http://127.0.0.1:8080/Doctors/', {
         type: 'GET',
         dataType: 'json',
         success: function (data) {

@@ -7,7 +7,11 @@ define(function (require, exports, module) {
     },
     render () {
       return (
-            <li> {this.props.Doctor.name} </li>
+            <tr>
+            <td> {this.props.Doctor.name} </td>
+            <td> {this.props.Doctor.phone} </td>
+            <td> {this.props.Doctor.address} </td>
+             </tr>
         )
     }
   }

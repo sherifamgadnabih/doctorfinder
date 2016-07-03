@@ -11,6 +11,7 @@ define(function (require, exports, module) {
             <td> {this.props.Doctor.name} </td>
             <td> {this.props.Doctor.phone} </td>
             <td> {this.props.Doctor.address} </td>
+             <td>  </td>
              </tr>
         )
     }

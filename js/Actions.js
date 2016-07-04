@@ -18,7 +18,6 @@ define(function (require, exports, module) {
         type: 'POST',
         data: doctor,
         success: function (data) {
-          console.log(typeof callback)
           if (typeof callback === 'function') {
             callback()
           }

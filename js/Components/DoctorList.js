@@ -18,7 +18,6 @@ define(function (require, exports, module) {
 
     },
     render () {
-      console.log(this.props.Doctors)
       var Doctors = []
       this.props.Doctors.forEach(function (doctor) {
         Doctors.push(<DoctorRow Doctor={doctor} ></DoctorRow>)

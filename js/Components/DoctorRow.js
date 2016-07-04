@@ -6,7 +6,6 @@ define(function (require, exports, module) {
       Doctor: React.PropTypes.object.isRequired
     },
     render () {
-      console.log(this.props)
       return (
             <tr>
             <td> {this.props.Doctor.name} </td>

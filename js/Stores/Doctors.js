@@ -9,7 +9,6 @@
      switch (action.type) {
 
        case ApplicationConstants.AddDoctorAction:
-         console.log(action.Doctor)
          return Object.assign({}, state, {
            Doctors: state.Doctors.concat([
              action.Doctor

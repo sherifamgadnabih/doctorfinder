@@ -17,6 +17,11 @@
        case ApplicationConstants.DoctorsLoaded:
          return Object.assign({}, state, {
            Doctors: action.Doctors})
+       case ApplicationConstants.DoctorDeleted:
+         return Object.assign({}, state, {
+           Doctors: state.Doctors.filter(function (doctor) {
+             doctor.name !== action.DoctorName
+           }) })
        default:
          return state
      }

@@ -19,7 +19,9 @@ define(function (require, exports, module) {
     },
     render () {
       var Doctors = []
+    
       this.props.Doctors.forEach(function (doctor) {
+        console.log(doctor)
         Doctors.push(<DoctorRow Doctor={doctor} ></DoctorRow>)
       }, this)
       return (
@@ -29,6 +31,7 @@ define(function (require, exports, module) {
               <th> Name </th>
               <th> Phone </th>
               <th> Address </th>
+              <th> </th>
 
             </tr>
           </thead>

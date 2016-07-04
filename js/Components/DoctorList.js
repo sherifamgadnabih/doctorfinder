@@ -7,9 +7,9 @@ define(function (require, exports, module) {
   var ReactRedux = require('reactRedux')
   var DoctorList = React.createClass({
 
-    getInitialState: function () {
-      return store.getState()
-    },
+    // getInitialState: function () {
+    //   return store.getState()
+    // },
     componentDidMount: function () {
      // store.subscribe(() => { this.setState(store.getState()) })
      // actions.GetDoctors()
@@ -18,6 +18,7 @@ define(function (require, exports, module) {
 
     },
     render () {
+      console.log(this.props.Doctors)
       var Doctors = []
       this.props.Doctors.forEach(function (doctor) {
         Doctors.push(<DoctorRow Doctor={doctor} ></DoctorRow>)
@@ -29,7 +30,6 @@ define(function (require, exports, module) {
               <th> Name </th>
               <th> Phone </th>
               <th> Address </th>
-              <th> </th>
 
             </tr>
           </thead>
@@ -43,6 +43,7 @@ define(function (require, exports, module) {
     // This component will have access to `appstate.heroes` through `this.props.heroes`
     return {Doctors: state.Doctors}
   }
+
   module.exports = ReactRedux.connect(mapStateToProps)(DoctorList)
 }
 

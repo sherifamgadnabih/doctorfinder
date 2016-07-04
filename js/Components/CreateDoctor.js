@@ -4,6 +4,7 @@ define(function (require, exports, module) {
   var store = require('../Stores/Doctors.js')
   var ApplicationConstants = require('../Constants/Application.js')
   var hashHistory = require('reactRouter').hashHistory
+  var ReactRedux = require('reactRedux')
   var CreateDoctor = React.createClass({
     name: '',
     phone: '',

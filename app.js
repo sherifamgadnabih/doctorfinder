@@ -2,7 +2,9 @@ var express = require('express')
 var app = express()
 var mongoose = require('mongoose')
 var bodyParser = require('body-parser')
-
+app.use('/static', express.static('Views'))
+app.use('/node_modules', express.static('node_modules'))
+app.use('/lib', express.static('lib'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true

@@ -1,31 +1,33 @@
- define(function (require, exports, module) {
-   var redux = require('redux')
-   var ApplicationConstants = require('../Constants/Application.js')
-   var defaultState = {
-     Doctors: []
-   }
+define(function (require, exports, module) {
+  var ApplicationConstants = require('../Constants/Application.js')
+  var actions = require('../Actions.js')
 
-   function doctorStore (state = defaultState, action) {
-     switch (action.type) {
+  function doctorStore (state = [{}], action) {
+    switch (action.type) {
+      case ApplicationConstants.LoadDoctors:
+        actions.GetDoctors(function (data) {
+          action.dispatch({ type: ApplicationConstants.DoctorsLoaded, Doctors: data.data })
+        })
+        return state
 
-       case ApplicationConstants.AddDoctorAction:
-         return Object.assign({}, state, {
-           Doctors: state.Doctors.concat([
-             action.Doctor
-           ])
-         })
-       case ApplicationConstants.DoctorsLoaded:
-         return Object.assign({}, state, {
-           Doctors: action.Doctors})
-       case ApplicationConstants.DoctorDeleted:
-         return Object.assign({}, state, {
-           Doctors: state.Doctors.filter(function (doctor) {
-             doctor.name !== action.DoctorName
-           }) })
-       default:
-         return state
-     }
-   }
+      case ApplicationConstants.AddDoctorAction:
 
-   module.exports = redux.createStore(doctorStore)
- })
+        actions.addDoctor(action.Doctor, null)
+        return state
+
+      case ApplicationConstants.DoctorsLoaded:
+        return Object.assign([], state,
+          action.Doctors)
+      case ApplicationConstants.DoctorDeleted:
+        //actions.DeleteDoctor(action.doctorID)
+        return Object.assign([], state,
+          state.filter(function (doctor) {
+            return doctor._id !== action.doctorID
+          }))
+      default:
+        return state
+    }
+  }
+
+  module.exports = doctorStore
+})

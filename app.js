@@ -26,14 +26,13 @@ app.use(function (req, res, next) {
 })
 mongoose.connect('mongodb://localhost/Doctors')
 var Doctor = require('./Models/Doctor.js')
-
+var Speciality = require('./Models/Speciality.js')
 app.get('/', function (request, response) {
   response.write('Hello World')
   response.end()
 })
 
 app.post('/AddDoctor', function (request, response) {
-  console.log(request.body)
   var newdoctor = Doctor(request.body)
   newdoctor.save(function (err) {
     if (err) {
@@ -54,7 +53,26 @@ app.get('/Doctors', function (request, response) {
     response.json({info: 'Doctors found successfully', data: doctors})
   })
 })
+app.get('/Specialities', function (request, response) {
+  Speciality.find(function (error, specialities) {
+    if (error) {
+      response.json({info: 'error during find Doctors', error: error})
+    };
+    response.json({info: 'specialities found successfully', data: specialities})
+  })
+})
+app.post('/AddSpeciality', function (request, response) {
+  var newSpeciality = Speciality(request.body)
+  newSpeciality.save(function (error) {
+    if (error) {
+      response.write('failed to add doctor')
+    } else {
+      response.write('Speciality Added')
+    }
 
+    response.end()
+  })
+})
 app.get('/Doctors/:Id', function (request, response) {
   Doctor.findById(request.params.Id, function (err, doctor) {
     if (err) {
@@ -63,7 +81,15 @@ app.get('/Doctors/:Id', function (request, response) {
     response.json({info: 'doctor found successfully', data: doctor})
   })
 })
-
+app.delete('/DeleteDoctor/:Id', function (request, response) {
+  Doctor.findById(request.params.Id, function (err, doctor) {
+    if (err) {
+      response.json({info: 'error during find doctor', error: err})
+    };
+    doctor.remove()
+    response.end()
+  })
+})
 app.listen(8080, function () {
   console.log('server is runnig')
 })

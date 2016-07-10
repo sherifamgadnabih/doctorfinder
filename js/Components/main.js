@@ -1,5 +1,6 @@
 define(function (require) {
   var React = require('react')
+  var redux = require('redux')
   var ReactDom = require('reactDom')
   var CreateDoctor = require('../lib/Components/CreateDoctor.js')
   var DoctorList = require('../lib/Components/DoctorList.js')
@@ -7,10 +8,11 @@ define(function (require) {
   var Route = require('reactRouter').Route
   var hashHistory = require('reactRouter').hashHistory
   var Provider = require('reactRedux').Provider
-  var store = require('../lib/Stores/Doctors.js')
+  var reducer = require('../lib/Stores/index.js')
   var MainComponent = React.createClass({
 
     render () {
+      var store = redux.createStore(reducer)
       return (
 
         <Provider store={store}>

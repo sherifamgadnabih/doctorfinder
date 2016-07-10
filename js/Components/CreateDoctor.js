@@ -1,6 +1,5 @@
 define(function (require, exports, module) {
   var React = require('react')
-  var actions = require('../Actions.js')
   var store = require('../Stores/Doctors.js')
   var ApplicationConstants = require('../Constants/Application.js')
   var hashHistory = require('reactRouter').hashHistory
@@ -27,8 +26,7 @@ define(function (require, exports, module) {
       //   console.log('added')
       //   hashHistory.push('/')
       // })
-
-      store.dispatch({type: ApplicationConstants.AddDoctorAction, Doctor: {name: this.name, phone: this.phone, address: this.address}})
+      this.props.dispatch({type: ApplicationConstants.AddDoctorAction, Doctor: {name: this.name, phone: this.phone, address: this.address}})
       hashHistory.push('/')
     },
 
@@ -58,6 +56,12 @@ define(function (require, exports, module) {
     }
 
   })
-  module.exports = CreateDoctor
+  var mapDispatchToProps = function (dispatch) {
+    return {
+      dispatch
+    }
+  }
+
+  module.exports = ReactRedux.connect(mapDispatchToProps)(CreateDoctor)
 })
 

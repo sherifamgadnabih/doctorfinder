@@ -1,28 +1,32 @@
 define(function (require, exports, module) {
   var React = require('react')
-  var store = require('../Stores/Doctors.js')
   var ApplicationConstants = require('../Constants/Application.js')
+  var ReactRedux = require('reactRedux')
   var DoctorRow = React.createClass({
     propTypes: {
       Doctor: React.PropTypes.object.isRequired
     },
-    DeleteDoctor: function (doctorName) {
-      store.dispatch({type: ApplicationConstants.DoctorDeleted, DoctorName: doctorName})
+    DeleteDoctor: function () {
+      this.props.dispatch({type: ApplicationConstants.DoctorDeleted, doctorID: this.props.Doctor._id})
     },
     render () {
-      console.log(this.props.Doctor.name)
       return (
             <tr>
             <td> {this.props.Doctor.name} </td>
             <td> {this.props.Doctor.phone} </td>
             <td> {this.props.Doctor.address} </td>
-            <td> <a href='#' onClick={this.DeleteDoctor.bind(this, this.props.Doctor.name)} > Delete </a> </td>
+            <td> <a href='#' onClick={this.DeleteDoctor} > Delete </a> </td>
              </tr>
         )
     }
   }
 
   )
-
-  module.exports = DoctorRow
+  var mapDispatchToProps = function (dispatch) {
+    return {
+      dispatch
+    }
+  }
+  
+  module.exports = ReactRedux.connect(mapDispatchToProps)(DoctorRow)
 })

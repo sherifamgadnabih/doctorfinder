@@ -3,48 +3,45 @@ define(function (require, exports, module) {
   var ReactDom = require('reactDom')
   var store = require('../Stores/Doctors.js')
   var DoctorRow = require('../Components/DoctorRow.js')
+  var ApplicationConstants = require('../Constants/Application.js')
   var actions = require('../Actions.js')
   var ReactRedux = require('reactRedux')
-  var ApplicationConstants = require('../Constants/Application.js')
-  var DoctorList = React.createClass({
 
+  var SpecialityList = React.createClass({
     componentDidMount: function () {
-      this.props.dispatch({type: ApplicationConstants.LoadDoctors, dispatch: this.props.dispatch})
+      this.props.dispatch({type: ApplicationConstants.LoadSpecialities, dispatch: this.props.dispatch})
     },
     render () {
-      var Doctors = []
+      var Specialities = []
 
-      this.props.Doctors.forEach(function (doctor) {
-        Doctors.push(<DoctorRow Doctor={doctor} ></DoctorRow>)
+      this.props.Specialities.forEach(function (speciality) {
+        Specialities.push(<DoctorRow Speciality={speciality} ></DoctorRow>)
       }, this)
       return (
         <div className='table-responsive'> <table className='table table-striped'>
           <thead>
             <tr>
               <th> Name </th>
-              <th> Phone </th>
-              <th> Address </th>
               <th> </th>
 
             </tr>
           </thead>
           <tbody>
-            {Doctors}
+            {Specialities}
           </tbody>
         </table> </div>)
     }
   })
   var mapStateToProps = function (state) {
     // This component will have access to `appstate.heroes` through `this.props.heroes`
-    return {Doctors: state.Doctors}
+    return {Specialities: state.Specialites}
   }
   var mapDispatchToProps = function (dispatch) {
     return {
       dispatch
     }
   }
-  module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(DoctorList)
+  module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(SpecialityList)
 }
 
 )
-

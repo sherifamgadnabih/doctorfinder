@@ -2,9 +2,9 @@ define(function (require, exports, module) {
   var React = require('react')
   var ReactDom = require('reactDom')
   var store = require('../Stores/Doctors.js')
-  var DoctorRow = require('../Components/DoctorRow.js')
+  var SpecialityRow = require('../Components/SpecialityRow.js')
   var ApplicationConstants = require('../Constants/Application.js')
-  var actions = require('../Actions.js')
+  var CreateSpeciality = require('../Components/CreateSpeciality.js')
   var ReactRedux = require('reactRedux')
 
   var SpecialityList = React.createClass({
@@ -14,8 +14,8 @@ define(function (require, exports, module) {
     render () {
       var Specialities = []
 
-      this.props.Specialities.forEach(function (speciality) {
-        Specialities.push(<DoctorRow Speciality={speciality} ></DoctorRow>)
+      this.props.Specialities.forEach(function (speciality, index) {
+        Specialities.push(<SpecialityRow Speciality={speciality} Index={index}></SpecialityRow>)
       }, this)
       return (
         <div className='table-responsive'> <table className='table table-striped'>
@@ -29,7 +29,9 @@ define(function (require, exports, module) {
           <tbody>
             {Specialities}
           </tbody>
-        </table> </div>)
+        </table>
+        <CreateSpeciality> </CreateSpeciality>
+        </div>)
     }
   })
   var mapStateToProps = function (state) {

@@ -4,6 +4,7 @@ define(function (require) {
   var ReactDom = require('reactDom')
   var CreateDoctor = require('../lib/Components/CreateDoctor.js')
   var DoctorList = require('../lib/Components/DoctorList.js')
+  var SpecialityList = require('../lib/Components/SpecialityList.js')
   var Router = require('reactRouter').Router
   var Route = require('reactRouter').Route
   var hashHistory = require('reactRouter').hashHistory
@@ -18,6 +19,7 @@ define(function (require) {
         <Provider store={store}>
           <Router>
             <Route name='default' history={hashHistory} path='/' component={DoctorList}/>
+            <Route name='default' history={hashHistory} path='/Specialities' component={SpecialityList}/>
             <Route path='/Create' component={CreateDoctor}/>
           </Router>
         </Provider>

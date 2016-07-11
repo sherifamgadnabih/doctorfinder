@@ -73,6 +73,15 @@ app.post('/AddSpeciality', function (request, response) {
     response.end()
   })
 })
+app.delete('/DeleteSpeciality/:Id', function (request, response) {
+  Speciality.findById(request.params.Id, function (err, speciality) {
+    if (err) {
+      response.json({info: 'error during find doctor', error: err})
+    };
+    speciality.remove()
+    response.end()
+  })
+})
 app.get('/Doctors/:Id', function (request, response) {
   Doctor.findById(request.params.Id, function (err, doctor) {
     if (err) {

@@ -1,8 +1,8 @@
 define(function (require, exports, module) {
   var ApplicationConstants = require('../Constants/Application.js')
-  var actions = require('../Actions.js')
+  var actions = require('../Actions/Doctors.js')
 
-  function doctorStore (state = [{}], action) {
+  function doctorStore (state = [], action) {
     switch (action.type) {
       case ApplicationConstants.LoadDoctors:
         actions.GetDoctors(function (data) {
@@ -19,11 +19,9 @@ define(function (require, exports, module) {
         return Object.assign([], state,
           action.Doctors)
       case ApplicationConstants.DoctorDeleted:
-        //actions.DeleteDoctor(action.doctorID)
-        return Object.assign([], state,
-          state.filter(function (doctor) {
-            return doctor._id !== action.doctorID
-          }))
+        actions.DeleteDoctor(action.doctorID)
+        state.splice(action.Index, 1)
+        return state
       default:
         return state
     }

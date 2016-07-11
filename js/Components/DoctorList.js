@@ -14,8 +14,8 @@ define(function (require, exports, module) {
     render () {
       var Doctors = []
 
-      this.props.Doctors.forEach(function (doctor) {
-        Doctors.push(<DoctorRow Doctor={doctor} ></DoctorRow>)
+      this.props.Doctors.forEach(function (doctor, index) {
+        Doctors.push(<DoctorRow Doctor={doctor} Index={index} ></DoctorRow>)
       }, this)
       return (
         <div className='table-responsive'> <table className='table table-striped'>

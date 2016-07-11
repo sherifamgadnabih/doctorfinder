@@ -8,6 +8,10 @@ define(function (require, exports, module) {
     name: '',
     phone: '',
     address: '',
+    specialityId: '',
+    componentDidMount: function () {
+      this.props.dispatch({type: ApplicationConstants.LoadSpecialities, dispatch: this.props.dispatch})
+    },
     handleChange: function (event) {
       var controlid = event.target.id
       var value = event.target.value
@@ -20,13 +24,12 @@ define(function (require, exports, module) {
       if (controlid === 'address') {
         this.address = value
       }
+      if (controlid === 'Speciality') {
+        this.specialityId = value
+      }
     },
     onClick: function () {
-      // actions.addDoctor({name: this.name, phone: this.phone, address: this.address}, function () {
-      //   console.log('added')
-      //   hashHistory.push('/')
-      // })
-      this.props.dispatch({type: ApplicationConstants.AddDoctorAction, Doctor: {name: this.name, phone: this.phone, address: this.address}})
+      this.props.dispatch({type: ApplicationConstants.AddDoctorAction, Doctor: {name: this.name, phone: this.phone, address: this.address, Speciality: this.specialityId}})
       hashHistory.push('/')
     },
 
@@ -35,7 +38,13 @@ define(function (require, exports, module) {
 
         marginTop: 60
       }
-
+      if (this.props.Specialities.length > 0) {
+        this.specialityId = this.props.Specialities[0]._id
+      }
+      var Specialites = []
+      this.props.Specialities.forEach(function (speciality) {
+        Specialites.push(<option value={speciality._id} > {speciality.name} </option>)
+      })
       return (
                 <form style={style} role='form'>
                     <div className='form-group'>
@@ -50,6 +59,13 @@ define(function (require, exports, module) {
                         <label for='address'>Address: </label>
                         <input type='text' onChange={this.handleChange} className='form-control' id='address'/>
                     </div>
+                    <div className='form-group'>
+                        <label for='Speciality'>Speciality: </label>
+                        <select id='Speciality' onChange={this.handleChange} className='form-control'>
+                        {Specialites}
+
+                        </select>
+                    </div>
                     <button type='button' onClick={this.onClick} className='btn btn-default'>Submit</button>
                 </form>
             )
@@ -61,7 +77,11 @@ define(function (require, exports, module) {
       dispatch
     }
   }
+  var mapStateToProps = function (state) {
+    // This component will have access to `appstate.heroes` through `this.props.heroes`
+    return {Specialities: state.Specialites}
+  }
 
-  module.exports = ReactRedux.connect(mapDispatchToProps)(CreateDoctor)
+  module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(CreateDoctor)
 })
 

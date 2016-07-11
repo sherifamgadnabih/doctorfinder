@@ -15,6 +15,7 @@ define(function (require, exports, module) {
             <td> {this.props.Doctor.name} </td>
             <td> {this.props.Doctor.phone} </td>
             <td> {this.props.Doctor.address} </td>
+            <td> {this.props.Doctor.Speciality.name} </td>
             <td> <a href='#' onClick={this.DeleteDoctor} > Delete </a> </td>
              </tr>
         )

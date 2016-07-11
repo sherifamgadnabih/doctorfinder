@@ -46,7 +46,7 @@ app.post('/AddDoctor', function (request, response) {
 })
 
 app.get('/Doctors', function (request, response) {
-  Doctor.find(function (err, doctors) {
+  Doctor.find().populate('Speciality').exec(function (err, doctors) {
     if (err) {
       response.json({info: 'error during find Doctors', error: err})
     };

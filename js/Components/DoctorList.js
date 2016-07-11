@@ -24,6 +24,7 @@ define(function (require, exports, module) {
               <th> Name </th>
               <th> Phone </th>
               <th> Address </th>
+              <th> Speciality </th>
               <th> </th>
 
             </tr>

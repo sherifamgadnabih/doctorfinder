@@ -10,20 +10,39 @@ define(function (require) {
   var hashHistory = require('reactRouter').hashHistory
   var Provider = require('reactRedux').Provider
   var reducer = require('../lib/Stores/index.js')
+  var Spinner = require('reactSpinkit')
+  var $ = require('jquery')
+  $(document).ajaxStart(function () {
+    $('#loadingDiv').show()
+     $('#content').hide()
+  })
+  $(document).ajaxStop(function () {
+    setTimeout(function () {
+      $('#loadingDiv').hide()
+       $('#content').show()
+    }, 3000)
+  })
   var MainComponent = React.createClass({
 
     render () {
+      document.getElementsByTagName('body')
       var store = redux.createStore(reducer)
       return (
+        <div>
+        <div id='loadingDiv' style={{width: '100%', height: '100%', zIndex: 1000, display: 'none'}}>
+        <Spinner style={{width: '100%', height: '100%', zIndex: 1000}} spinnerName='circle'> </Spinner>
+         </div>
+         <div id='content' style ={{display:'none'}}> 
+          <Provider store={store}>
+            <Router>
+              <Route name='default' history={hashHistory} path='/' component={DoctorList}/>
+              <Route name='default' history={hashHistory} path='/Specialities' component={SpecialityList}/>
+              <Route path='/Create' component={CreateDoctor}/>
+            </Router>
 
-        <Provider store={store}>
-          <Router>
-            <Route name='default' history={hashHistory} path='/' component={DoctorList}/>
-            <Route name='default' history={hashHistory} path='/Specialities' component={SpecialityList}/>
-            <Route path='/Create' component={CreateDoctor}/>
-          </Router>
-        </Provider>
-
+          </Provider>
+          </div>
+        </div>
       )
     }
   })

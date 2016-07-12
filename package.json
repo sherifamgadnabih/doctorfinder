@@ -14,8 +14,11 @@
     "react": "^15.1.0",
     "react-debug": "^1.0.0",
     "react-dom": "^15.1.0",
+    "react-imageloader": "^2.1.0",
+    "react-lazy-load": "^3.0.10",
     "react-redux": "^4.4.5",
     "react-router": "^2.5.1",
+    "react-spinkit": "^1.1.8",
     "redux": "^3.5.2",
     "requirejs": "^2.2.0"
   },

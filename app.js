@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 app.use('/static', express.static('Views'))
 app.use('/node_modules', express.static('node_modules'))
 app.use('/lib', express.static('lib'))
+app.use('/Images', express.static('Images'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
